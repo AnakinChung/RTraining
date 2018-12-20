@@ -1,3 +1,0 @@
-demo(graphics)
-demo(persp)
-
