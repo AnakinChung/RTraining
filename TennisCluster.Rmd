@@ -1,0 +1,27 @@
+---
+title: "tennisCluster"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+par(family='STKaiti')
+library(mvstats)
+a = read.csv('tennis.csv')
+a = a[-2]
+a0 = a[-1]
+
+pca.fit=princomp(a0)
+screeplot(pca.fit,type = 'l')
+fac.out = factpc(a0,rotation="varimax")
+fac.out$Vars
+cbind(round(fac.out$loadings,1),round(fac.out$common,1))
+fac.score = fac.out$scores
+colnames((fac.score))=c()
+set.seed(2)                           
+km.out<-kmeans(fac.score,7,nstart=20)
+km.out$centers 
+```
